@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require("express");
 const mongoose = require('mongoose');
 const productRoute = require("./routes/productRoute");
+const errorMiddleware = require("./middleware/errorMiddleware")
 
 const app = express()
 
@@ -11,7 +12,7 @@ app.use(express.json())
 
 app.use("/api/products", productRoute);
 
-
+app.use(errorMiddleware);
 
 
 mongoose.connect(MONGO_URL).then(() => {
