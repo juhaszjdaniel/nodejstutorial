@@ -1,7 +1,11 @@
+require('dotenv').config()
 const express = require("express");
 const mongoose = require('mongoose');
+
 const Product = require('./models/productModel');
 const app = express()
+
+const MONGO_URL= process.env.MONGO_URL
 
 app.use(express.json())
 
@@ -87,7 +91,7 @@ app.delete('/products/:id', async (req,res) => {
 
 
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0.w60u71u.mongodb.net/nodetutorial?retryWrites=true&w=majority').then(() => {
+mongoose.connect(MONGO_URL).then(() => {
     console.log("Connected to mongodb")
     app.listen(3000, ()=> {
         console.log('Node is running on port 3000');
